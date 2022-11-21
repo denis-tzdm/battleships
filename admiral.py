@@ -48,7 +48,7 @@ class HumanAdmiral(Admiral):
     def fire(self) -> tuple[int, int]:
         while True:
             try:
-                input_str = input(f'\nEnter "row col" to fire your guns or '
+                input_str = input(f'\nEnter position as "x y" to fire your guns or '
                                   f'"{s.STOP_COMMAND}" to stop the game: ')
                 return self.validate_input(input_str)
             except BadInput:

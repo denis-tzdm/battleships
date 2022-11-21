@@ -25,10 +25,11 @@ class SamePos(BadInput):
 class NotTwoArguments(BadInput):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
-        print('Enter two space-separated coordinates!')
+        print('Enter two space-separated coordinates ("x y")!')
 
 
 class NonIntegers(BadInput):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
-        print('Enter two space separated coordinates (integers)!')
+        print('Enter two space-separated coordinates (integers) '
+              'without quotes!')

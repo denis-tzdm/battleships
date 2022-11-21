@@ -8,11 +8,11 @@ def field_head_bottom_row(char=' ', ind=False):
 
 
 def field_left(row):
-    print(' ' + str(row + 1), end=' ⎸')
+    print(' ' + str(row + 1), end=' |')
 
 
 def field_right():
-    print('', end='⎹')
+    print('', end='|')
 
 
 def field_inner(fleet: Fleet, row: int):
@@ -49,9 +49,9 @@ class Board:
         field_head_bottom_row(ind=True)
         print()
 
-        field_head_bottom_row('⎽')
+        field_head_bottom_row('─')
         board_divider()
-        field_head_bottom_row('⎽')
+        field_head_bottom_row('─')
         print()
 
         for row in range(s.GRID_SIZE):
@@ -64,7 +64,7 @@ class Board:
             field_right()
             print()
 
-        field_head_bottom_row('⎺')
+        field_head_bottom_row('─')
         board_divider()
-        field_head_bottom_row('⎺')
+        field_head_bottom_row('─')
         print()
