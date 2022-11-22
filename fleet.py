@@ -13,6 +13,7 @@ class Fleet:
     free_cells: set[tuple[int, int]]
     # set of free cells (row, column) for ship positioning
     shots: list[tuple[int, int]]  # list of moves
+    zones: list[tuple[int, int]]  # list of dead zones for AI
     hidden: bool  # to hide AI ships from player
     sunk: bool  # oh, no!
 
@@ -22,6 +23,7 @@ class Fleet:
                          for row in range(self._size))
         self.ships = []
         self.shots = []
+        self.zones = []
         self.free_cells = self.cells
         self.hidden = hidden
 
@@ -62,3 +64,6 @@ class Fleet:
                 self.sunk = all(a.sunk for a in self.ships)
                 return ship
         return None
+
+    def add_zone(self, zone: list[tuple[int, int]]) -> None:
+        self.zones.extend(zone)

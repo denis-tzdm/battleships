@@ -3,6 +3,7 @@ import random as rnd
 import settings as s
 from exceptions import *
 from fleet import Fleet
+from ship import Ship
 
 
 class Admiral:
@@ -28,6 +29,9 @@ class Admiral:
     def fire(self) -> tuple[int, int] | None:
         return None
 
+    def hit(self, pos: tuple[int, int]) -> Ship | None:
+        return self.fleet.hit(pos)
+
 
 class AIAdmiral(Admiral):
     """AI player"""
@@ -36,8 +40,18 @@ class AIAdmiral(Admiral):
 
     def fire(self) -> tuple[int, int]:
         # to-do: sequential AI shot logic
-        shots_left = self.fleet.cells.difference(set(self.fleet.shots))
+        useless_shots = set(self.fleet.shots + self.fleet.zones)
+        shots_left = self.fleet.cells.difference(useless_shots)
+
         return rnd.choice(list(shots_left))
+
+    def hit(self, pos: tuple[int, int]) -> Ship | None:
+        hit: Ship = self.fleet.hit(pos)
+        # no point in firing sunk ship's dead zone
+        # so add it to fleet zones list
+        if hit and hit.sunk:
+            self.fleet.add_zone(hit.zone)
+        return hit
 
 
 class HumanAdmiral(Admiral):
@@ -53,6 +67,9 @@ class HumanAdmiral(Admiral):
                 return self.validate_input(input_str)
             except BadInput:
                 pass
+
+    def hit(self, pos: tuple[int, int]) -> Ship | None:
+        return self.fleet.hit(pos)
 
     def validate_input(self, input_str: str) -> tuple[int, int]:
         # stop command
