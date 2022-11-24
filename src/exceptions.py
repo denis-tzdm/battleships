@@ -10,16 +10,22 @@ class BadInput(Exception):
     pass
 
 
-class OutOfBoard(BadInput):
+class OutOfBoardShot(BadInput):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
         print('Fire position out of board range!')
 
 
-class SamePos(BadInput):
+class SamePosShot(BadInput):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
         print('Already fired there!')
+
+
+class DeadZoneShot(BadInput):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+        print('It\'s a sunk ship zone, nothing there!')
 
 
 class NotTwoArguments(BadInput):

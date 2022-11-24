@@ -1,5 +1,5 @@
-from exceptions import *
-from game import Game
+from exceptions import GameOver, GameBreak
+from games import Game
 
 
 def main():
@@ -8,7 +8,7 @@ def main():
         try:
             game.turn()
         except GameOver as e:
-            game.board.show()
+            print(game.board)
             print(game.shot_message)
             print(f'Game over: {e.args[0]}')
             break
